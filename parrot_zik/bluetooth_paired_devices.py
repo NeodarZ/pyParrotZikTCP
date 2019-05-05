@@ -4,6 +4,9 @@ from subprocess import Popen, PIPE, STDOUT
 
 from .resource_manager import GenericResourceManager
 
+import dbus
+from . import bluezutils
+
 if sys.platform == "darwin":
     from binplist import binplist
     import lightblue
@@ -29,26 +32,37 @@ class BluetoothDeviceManager(object):
 
 class BluezBluetoothDeviceManager(BluetoothDeviceManager):
     def is_bluetooth_on(self):
-        pipe = Popen(['bluez-test-adapter', 'powered'], stdout=PIPE, stdin=PIPE,
-                     stderr=STDOUT)
-        try:
-            stdout, stderr = pipe.communicate()
-        except dbus.exceptions.DBusException:
-            pass
-        else:
-            return bool(stdout.strip())
+        bus = dbus.SystemBus()
+        adapter_path = bluezutils.find_adapter().object_path
+        adapter = dbus.Interface(bus.get_object("org.bluez", adapter_path), "org.freedesktop.DBus.Properties")
+
+        return adapter.Get("org.bluez.Adapter1", "Powered")
+
 
     def get_mac(self):
-        pipe = Popen(['bluez-test-device', 'list'], stdout=PIPE, stdin=PIPE,
-                     stderr=STDOUT)
+        addresses = []
         try:
-            stdout, stderr = pipe.communicate()
+            bus = dbus.SystemBus()
+            adapter = bluezutils.find_adapter()
+            adapter_path = adapter.object_path
+
+            om = dbus.Interface(bus.get_object("org.bluez", "/"),
+                    "org.freedesktop.DBus.ObjectManager")
+            objects = om.GetManagedObjects()
+
+            for path, interfaces in objects.items():
+                if "org.bluez.Device1" not in interfaces:
+                    continue
+                properties = interfaces["org.bluez.Device1"]
+                if properties["Adapter"] != adapter_path:
+                    continue;
+                addresses.append(properties)
         except dbus.exceptions.DBusException:
             pass
         else:
-            res = p.findall(stdout)
-            if len(res) > 0:
-                return res[0]
+            res = next(item for item in addresses if re.search(p, item["Address"]))
+            if res['Connected']:
+                return res['Address']
             else:
                 raise DeviceNotConnected
 

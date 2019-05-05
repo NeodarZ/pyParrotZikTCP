@@ -78,7 +78,7 @@ class ResourceManagerBase(object):
             self.sock.recv(30)
         else:
             self.sock.recv(7)
-        return BeautifulSoup(self.sock.recv(1024))
+        return BeautifulSoup(self.sock.recv(1024), features="html5lib")
 
     def close(self):
         self.sock.close()

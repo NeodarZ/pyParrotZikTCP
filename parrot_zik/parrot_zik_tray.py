@@ -1,11 +1,11 @@
-from parrot_zik.interface.version1 import ParrotZikVersion1Interface
-from parrot_zik.interface.version2 import ParrotZikVersion2Interface
-from parrot_zik import resource_manager
-from parrot_zik import bluetooth_paired_devices
-from parrot_zik.indicator import MenuItem
-from parrot_zik.indicator import Menu
-from parrot_zik.indicator import SysIndicator
-from parrot_zik.utils import repeat
+from interface.version1 import ParrotZikVersion1Interface
+from interface.version2 import ParrotZikVersion2Interface
+import resource_manager
+import bluetooth_paired_devices
+from indicator import MenuItem
+from indicator import Menu
+from indicator import SysIndicator
+from utils import repeat
 
 REFRESH_FREQUENCY = 30000
 RECONNECT_FREQUENCY = 5000

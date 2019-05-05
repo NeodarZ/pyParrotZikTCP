@@ -59,7 +59,7 @@ class BluetoothCmdDeviceManager(BluetoothDeviceManager):
 
     def get_mac(self):
         pipe = Popen(['bluetoothctl'], stdout=PIPE, stdin=PIPE, stderr=STDOUT)
-        res = pipe.communicate("exit")
+        res = str(pipe.communicate("exit".encode("UTF-8")))
         if len(res) > 0 and res[0]:
             match = p.search(res[0])
             if match:

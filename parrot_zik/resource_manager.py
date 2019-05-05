@@ -45,7 +45,7 @@ class ResourceManagerBase(object):
 
     def send_message(self, message):
         try:
-            self.sock.send(str(message))
+            self.sock.send(bytes(message.request))
             return self.get_answer(message)
         except bluetooth.btcommon.BluetoothError:
             raise DeviceDisconnected

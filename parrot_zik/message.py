@@ -11,14 +11,14 @@ class Message:
     def request(self):
         message = bytearray()
         message.extend(self.header)
-        message.extend(bytearray(self.request_string))
+        message.extend(bytearray(self.request_string, 'utf-8'))
         return message
 
     @property
     def header(self):
         header = bytearray([0])
         header.append(len(self.request_string) + 3)
-        header.append("\x80")
+        header.append(0x80)
         return header
 
     @property

@@ -1,4 +1,9 @@
 class Message:
+    """
+    The headset detect new command with the following schema:
+        \x00<(message size + 3) in hex>\x80<message in hex>
+    It must be keeped in bytes because \x80 is not in the ASCII table.
+    """
     def __init__(self, resource, method, arg=None):
         self.method = method
         self.resource = resource

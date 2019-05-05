@@ -60,9 +60,14 @@ class BluezBluetoothDeviceManager(BluetoothDeviceManager):
         except dbus.exceptions.DBusException:
             pass
         else:
-            res = next(item for item in addresses if re.search(p, item["Address"]))
+            try:
+                res = next(item for item in addresses if re.search(p, item["Address"]))
+            except StopIteration:
+                raise DeviceNotFound
             if res['Connected']:
                 return res['Address']
+            elif not res['Paired']:
+                raise DeviceNotPaired
             else:
                 raise DeviceNotConnected
 
@@ -84,8 +89,10 @@ class BluetoothCmdDeviceManager(BluetoothDeviceManager):
 def get_parrot_zik_mac_linux():
     bluez_manager = BluezBluetoothDeviceManager()
     try:
-        bluez_manager.is_bluetooth_on()
-        return bluez_manager.get_mac()
+        if bluez_manager.is_bluetooth_on():
+            return bluez_manager.get_mac()
+        else:
+            raise BluetoothIsNotOn
     except OSError as e:
         if e.errno == 2:
             bluetoothcmd_manager = BluetoothCmdDeviceManager()
@@ -178,6 +185,13 @@ def connect():
 class DeviceNotConnected(Exception):
     pass
 
+
+class DeviceNotPaired(Exception):
+    pass
+
+
+class DeviceNotFound(Exception):
+    pass
 
 class ConnectionFailure(Exception):
     pass

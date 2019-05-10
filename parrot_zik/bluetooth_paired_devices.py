@@ -93,6 +93,8 @@ def get_parrot_zik_mac_linux():
             return bluez_manager.get_mac()
         else:
             raise BluetoothIsNotOn
+    except dbus.exceptions.DBusException:
+        raise BluetoothIsNotOn
     except OSError as e:
         if e.errno == 2:
             bluetoothcmd_manager = BluetoothCmdDeviceManager()

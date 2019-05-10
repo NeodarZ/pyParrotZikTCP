@@ -1,4 +1,4 @@
-Parrot Zik Applet
+Parrot Zik TCP Server
 ========
 
 ## Overview
@@ -9,27 +9,31 @@ https://www.parrot.com/en/audio/parrot-zik-3
 PyParrot Zik is unofficial tool that show Parrot Zik indicator on Windows and Linux.
 Thanks to [@serathius](https://github.com/serathius) for Parrot Zik 2.0 support.
 Thanks to [@moimadmax](https://github.com/moimadmax) for Parrot Zik 3.0 support.
+Thanks to [@m0sia](https://github.com/m0sia/pyParrotZik) for base code and the
+reverse engineering of Parrot Zik communication protocol.
+
+This repo contains some base class without unmaintained pyGTK crap and python3
+compatible code with a simple TCP client/server for use this.
 
 ## Windows Usage
 
-![https://ci.appveyor.com/api/projects/status/7o0v6hy6fqaeulrr?svg=true](https://ci.appveyor.com/api/projects/status/7o0v6hy6fqaeulrr?svg=true)
-Latest build(currently doesn't work):
-https://ci.appveyor.com/project/m0sia/pyParrotZik/build/artifacts
-
-Outdated version that supports only Zik 1.0:
-http://goo.gl/dXij2t  
+Windows support is not tested for the moment. All old code from forked project
+is always here.
 
 ## Linux Usage
 
 1. Connect Parrot Zik with standard bluetooth connection
-2. Install the applet
+2. Install the server
    ```
    python setup install
    ```
-3. Run the applet
+3. Run the server
    ```
    parrot_zik_tray
    ```
+
+Battery status are save all 90 seconds in tmp file. You can use the simple
+client to use the server or build your own TCP client.
 
 ### Linux Requirement
 

@@ -9,7 +9,7 @@ else:
 
 
 setup(
-    name='parrotziktray',
+    name='parrotzikserver',
     description='Parrot Zik Tray Indicator',
     author="Dmitry Moiseev",
     author_email="m0sia@m0sia.ru",
@@ -20,8 +20,7 @@ setup(
 
     windows=[
         {
-            'script': 'parrot_zik/parrot_zik_tray.py',
-            'icon_resources': [(1, "./share/icons/zik/Headphone.ico")],
+            'script': 'parrot_zik/test_server.py',
         }
     ],
 
@@ -32,22 +31,15 @@ setup(
             'includes': 'cairo, pango, pangocairo, atk, gobject, gio, gtk.keysyms, _winreg',
             'dll_excludes': ['MSVCP90.dll', 'wbtapi.dll', 'irprops.cpl', 'crypt32.dll', 'MSIMG32.DLL', 'NSI.DLL', 'USP10.DLL', 'DNSAPI.DLL']        }
     },
-   
-    data_files=[
-        ("share/icons/zik", glob.glob("share/icons/zik/*.png"))
-            # If using GTK+'s built in SVG support, uncomment these
-            #os.path.join(gtk_base_path, '..', 'runtime', 'bin', 'gdk-pixbuf-query-loaders.exe'),
-            #os.path.join(gtk_base_path, '..', 'runtime', 'bin', 'libxml2-2.dll'),
-    ],
 
     install_requires=[
-        'beautifulsoup4', 'pybluez'
+        'beautifulsoup4', 'pybluez', 'dbus-python', 'twisted'
     ],
 
     packages=['parrot_zik', 'parrot_zik.interface', 'parrot_zik.indicator', 'parrot_zik.model'],
     entry_points={
         'console_scripts': [
-            'parrot_zik_tray=parrot_zik.parrot_zik_tray:ParrotZikIndicator.main',
+            'parrot_zik_srv=parrot_zik.test_server:ParrotZik.main',
         ]
     },
     include_package_data=True,

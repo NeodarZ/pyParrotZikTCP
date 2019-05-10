@@ -107,24 +107,25 @@ class NoiseControl(object):
 
 
 class NoiseControlTypes:
-    NOISE_CONTROL_MAX = NoiseControl('anc', 2)
-    NOISE_CONTROL_ON = NoiseControl('anc', 1)
-    NOISE_CONTROL_OFF = NoiseControl('off', 1)
-    STREET_MODE = NoiseControl('aoc', 1)
-    STREET_MODE_MAX = NoiseControl('aoc', 2)
+    representation = {
+        'NOISE_CONTROL_MAX': NoiseControl('anc', 2),
+        'NOISE_CONTROL_ON': NoiseControl('anc', 1),
+        'NOISE_CONTROL_OFF': NoiseControl('off', 1),
+        'STREET_MODE': NoiseControl('aoc', 1),
+        'STREET_MODE_MAX': NoiseControl('aoc', 2),
+    }
 
 
 class Rooms:
-    CONCERT_HALL = 'concert'
-    JAZZ_CLUB = 'jazz'
-    LIVING_ROOM = 'living'
-    SILENT_ROOM = 'silent'
-    representation = {
-        CONCERT_HALL: 'Concert Hall',
-        JAZZ_CLUB: 'Jazz Club',
-        LIVING_ROOM: 'Living Room',
-        SILENT_ROOM: 'Silent Room',
-    }
+    representation = [
+        'concert',
+        'jazz',
+        'living',
+        'silent',
+    ]
+
+class Angles:
+    representation = [30, 60, 90, 120, 150, 180]
 
 class SoundSource:
     LINE_IN = 'line-in'

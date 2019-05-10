@@ -45,6 +45,12 @@ Python-bluez is needed. On ubuntu based distro run
 sudo apt-get install python-bluez python-appindicator python-beautifulsoup
 ```
 
+## Development
+
+Installation: `python3 -m pip install -r requirements.txt`
+
+Running: `python3 -m parrot_zik.test_server`
+
 ## Mac OS Usage
 
 Based on investigation made for pyParrotZik the excellent Parrot-Status tool was developed specially for Mac OS (https://github.com/vincent-le-normand/Parrot-Status)

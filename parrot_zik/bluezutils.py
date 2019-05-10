@@ -23,7 +23,7 @@ def find_adapter_in_objects(objects, pattern=None):
                             path.endswith(pattern):
             obj = bus.get_object(SERVICE_NAME, path)
             return dbus.Interface(obj, ADAPTER_INTERFACE)
-    raise Exception("Bluetooth adapter not found")
+    raise BluetoothAdaptaterNotFound
 
 def find_device(device_address, adapter_pattern=None):
     return find_device_in_objects(get_managed_objects(), device_address,
@@ -44,5 +44,10 @@ def find_device_in_objects(objects, device_address, adapter_pattern=None):
             obj = bus.get_object(SERVICE_NAME, path)
             return dbus.Interface(obj, DEVICE_INTERFACE)
 
-    raise Exception("Bluetooth device not found")
+    raise BluetoothDeviceNotFound
 
+class BluetoothAdaptaterNotFound(Exception):
+    pass
+
+class BluetoothDeviceNotFound(Exception):
+    pass

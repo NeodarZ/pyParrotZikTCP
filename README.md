@@ -51,6 +51,15 @@ Installation: `python3 -m pip install -r requirements.txt`
 
 Running: `python3 -m parrot_zik.test_server`
 
+### Resources
+
+Some resources for informations purpose:
+
+- https://www.dpin.de/nf/computer-it-nerdine-geek/geraete-devices-toys/parrot-zik2/bluetooth-protocol/
+- https://www.dpin.de/nf/parrot-zik-2-0/
+- https://www.dpin.de/nf/computer-it-nerdine-geek/geraete-devices-toys/parrot-zik2/nfc/
+- https://www.dpin.de/nf/computer-it-nerdine-geek/geraete-devices-toys/parrot-zik2/firmware/
+
 ## Mac OS Usage
 
 Based on investigation made for pyParrotZik the excellent Parrot-Status tool was developed specially for Mac OS (https://github.com/vincent-le-normand/Parrot-Status)

@@ -15,6 +15,8 @@ reverse engineering of Parrot Zik communication protocol.
 This repo contains some base class without unmaintained pyGTK crap and python3
 compatible code with a simple TCP client/server for use this.
 
+/!\ Parrot Zik 1 not tested for the moment.
+
 ## Windows Usage
 
 Windows support is not tested for the moment. All old code from forked project

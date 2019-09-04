@@ -3,3 +3,4 @@ binplist == 0.1.4
 pybluez == 0.22
 dbus-python == 1.2.8
 twisted == 18.9.0
+html5lib == 1.0.1
